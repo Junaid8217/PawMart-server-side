@@ -126,9 +126,14 @@ async function run() {
       res.status(201).send(result)
     })
 
+
     //to get the order list
     app.get('/orders', async (req, res) => {
-      const result = await orderCollections.find().toArray();
+      
+      const { email } = req.query
+      console.log(email);
+      const query = { buyerEmail: email }
+      const result = await orderCollections.find(query).toArray()
       res.status(200).send(result)
     })
 
