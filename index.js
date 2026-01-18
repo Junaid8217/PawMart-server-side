@@ -132,7 +132,12 @@ async function run() {
       
       const { email } = req.query
       console.log(email);
-      const query = { buyerEmail: email }
+      
+      let query = {}
+      if (email) {
+        query = { buyerEmail: email }
+      }
+      
       const result = await orderCollections.find(query).toArray()
       res.status(200).send(result)
     })
